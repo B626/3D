@@ -24,14 +24,14 @@ const Character: React.FC<CharacterProps> = ({ camera }) => {
     left: boolean;
     right: boolean;
     run: boolean;
-    dance: boolean;
+    // dance: boolean;
   } = {
     forward: false,
     backward: false,
     left: false,
     right: false,
     run: false,
-    dance: false,
+    // dance: false,
   };
 
   const animations: Animations = {};
@@ -42,7 +42,8 @@ const Character: React.FC<CharacterProps> = ({ camera }) => {
   const acceleration = new THREE.Vector3(1, 0.125, 100.0);
   const velocity = new THREE.Vector3(0, 0, 0);
 
-  const c = useLoader(FBXLoader, "./character/character.fbx");
+  // const c = useLoader(FBXLoader, "./character/character_mann.fbx");
+  const c = useLoader(FBXLoader, "./character/character_binary.fbx");
 
   c.scale.setScalar(0.1);
   c.traverse((f) => {
@@ -52,29 +53,32 @@ const Character: React.FC<CharacterProps> = ({ camera }) => {
 
   const mixer = new THREE.AnimationMixer(c);
 
-  const idle = useFBX("./character/idle.fbx");
+  // const idle = useFBX("./character/idle.fbx");
+  const idle = useFBX("./character/idle_7.fbx");
 
   animations["idle"] = {
     clip: mixer.clipAction(idle.animations[0]),
   };
 
-  const walk = useFBX("./character/walking.fbx");
+  // const walk = useFBX("./character/walking.fbx");
+  const walk = useFBX("./character/walking_fixed.fbx");
 
   animations["walk"] = {
     clip: mixer.clipAction(walk.animations[0]),
   };
 
-  const run = useFBX("./character/running.fbx");
+  // const run = useFBX("./character/running.fbx");
+  const run = useFBX("./character/running_fixed.fbx");
 
   animations["run"] = {
     clip: mixer.clipAction(run.animations[0]),
   };
 
-  const dance = useFBX("./character/dance.fbx");
+  // const dance = useFBX("./character/dance.fbx");
 
-  animations["dance"] = {
-    clip: mixer.clipAction(dance.animations[0]),
-  };
+  // animations["dance"] = {
+  //   clip: mixer.clipAction(dance.animations[0]),
+  // };
 
   // set current Action
   let currAction = animations["idle"].clip;
@@ -104,10 +108,10 @@ const Character: React.FC<CharacterProps> = ({ camera }) => {
 
         break;
 
-      case 69: //e dance
-        activeAnimation.dance = true;
+      // case 69: //e dance
+      //   activeAnimation.dance = true;
 
-        break;
+      //   break;
       case 16: // shift
         activeAnimation.run = true;
         break;
@@ -132,9 +136,9 @@ const Character: React.FC<CharacterProps> = ({ camera }) => {
         activeAnimation.right = false;
         break;
 
-      case 69: //e dance
-        activeAnimation.dance = false;
-        break;
+      // case 69: //e dance
+      //   activeAnimation.dance = false;
+      //   break;
 
       case 16: // shift
         activeAnimation.run = false;
@@ -193,9 +197,9 @@ const Character: React.FC<CharacterProps> = ({ camera }) => {
       acc.multiplyScalar(2.0);
     }
 
-    if (currAction === animations["dance"].clip) {
-      acc.multiplyScalar(0.0);
-    }
+    // if (currAction === animations["dance"].clip) {
+    //   acc.multiplyScalar(0.0);
+    // }
 
     if (activeAnimation.forward) {
       newVelocity.z += acc.z * delta;
@@ -264,8 +268,8 @@ const Character: React.FC<CharacterProps> = ({ camera }) => {
       } else {
         currAction = animations["walk"].clip;
       }
-    } else if (activeAnimation.dance) {
-      currAction = animations["dance"].clip;
+    // } else if (activeAnimation.dance) {
+    //   currAction = animations["dance"].clip;
     } else {
       currAction = animations["idle"].clip;
     }

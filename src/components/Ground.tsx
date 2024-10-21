@@ -41,7 +41,7 @@ const Ground: React.FC = () => {
         ref={terrain}
       />
 
-      <meshPhongMaterial attach="material" color="#69b581" />
+      <meshPhongMaterial attach="material" color="green" />
     </mesh>
   );
 };

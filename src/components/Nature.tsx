@@ -1,5 +1,5 @@
 import { useLoader } from "@react-three/fiber";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
@@ -96,7 +96,7 @@ const Nature: React.FC = () => {
   const objects: JSX.Element[] = [];
 
   const createTrees = useMemo(() => {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 200; i++) {
       const idx: number = Math.floor(Math.random() * 11) + 1;
       const pos = new THREE.Vector3(
         Math.ceil(Math.random() * 450) * (Math.round(Math.random()) ? 1 : -1),
