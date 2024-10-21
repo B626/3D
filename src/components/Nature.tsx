@@ -1,49 +1,64 @@
 import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import React, { useEffect, useMemo } from "react";
 import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
 const Nature: React.FC = () => {
-  const [
-    birch3,
-    birch4,
-    berry1,
-    ctree3,
-    ctree5,
-    grass2,
-    grass,
-    rock1,
-    rock5,
-    willow2,
-    willow5,
-    log,
-  ] = useLoader(FBXLoader, [
-    "./textures/nature/BirchTree_3.fbx",
-    "./textures/nature/BirchTree_4.fbx",
-    "./textures/nature/BushBerries_1.fbx",
-    "./textures/nature/CommonTree_3.fbx",
-    "./textures/nature/CommonTree_5.fbx",
-    "./textures/nature/Grass_2.fbx",
-    "./textures/nature/Grass.fbx",
-    "./textures/nature/Rock_1.fbx",
-    "./textures/nature/Rock_5.fbx",
-    "./textures/nature/Willow_2.fbx",
-    "./textures/nature/Willow_5.fbx",
-    "./textures/nature/WoodLog_Moss.fbx",
-  ]);
+  // const [
+  //   birch3,
+  //   birch4,
+  //   berry1,
+  //   ctree3,
+  //   ctree5,
+  //   grass2,
+  //   grass,
+  //   rock1,
+  //   rock5,
+  //   willow2,
+  //   willow5,
+  //   log,
+  // ] = useLoader(FBXLoader, [
+  //   "./textures/nature/BirchTree_3.fbx",
+  //   "./textures/nature/BirchTree_4.fbx",
+  //   "./textures/nature/BushBerries_1.fbx",
+  //   "./textures/nature/tree_new2.fbx",
+  //   "./textures/nature/tree_new2.fbx",
+  //   "./textures/nature/Grass_2.fbx",
+  //   "./textures/nature/Grass.fbx",
+  //   "./textures/nature/Rock_1.fbx",
+  //   "./textures/nature/Rock_5.fbx",
+  //   "./textures/nature/Willow_2.fbx",
+  //   "./textures/nature/Willow_5.fbx",
+  //   "./textures/nature/WoodLog_Moss.fbx",
+  // ]);
+    const tree = useLoader(GLTFLoader, "./textures/nature/tree.glb");
+    const [
+      grass2,
+      grass,
+      rock1,
+      rock5,
+      log,
+    ] = useLoader(FBXLoader, [
+      "./textures/nature/Grass_2.fbx",
+      "./textures/nature/Grass.fbx",
+      "./textures/nature/Rock_1.fbx",
+      "./textures/nature/Rock_5.fbx",
+      "./textures/nature/WoodLog_Moss.fbx",
+    ]);
 
-  birch3.scale.setScalar(0.4);
-  birch3.traverse((o:any) => {
+  tree.scene.scale.setScalar(1.6);
+  tree.scene.traverse((o: any) => {
     o.castShadow = true;
     o.receiveShadow = true;
   });
-  birch4.scale.setScalar(0.3);
-  birch4.traverse((o: any) => {
+  tree.scene.scale.setScalar(1.6);
+  tree.scene.traverse((o: any) => {
     o.castShadow = true;
     o.receiveShadow = true;
   });
-  berry1.scale.setScalar(0.08);
-  berry1.traverse((o: any) => {
+  tree.scene.scale.setScalar(0.08);
+  tree.scene.traverse((o: any) => {
     o.castShadow = true;
     o.receiveShadow = true;
   });
@@ -67,13 +82,13 @@ const Nature: React.FC = () => {
     o.castShadow = true;
     o.receiveShadow = true;
   });
-  willow2.scale.setScalar(0.4);
-  willow2.traverse((o: any) => {
+  tree.scene.scale.setScalar(1.6);
+  tree.scene.traverse((o: any) => {
     o.castShadow = true;
     o.receiveShadow = true;
   });
-  willow5.scale.setScalar(0.5);
-  willow5.traverse((o: any) => {
+  tree.scene.scale.setScalar(1.6);
+  tree.scene.traverse((o: any) => {
     o.castShadow = true;
     o.receiveShadow = true;
   });
@@ -82,13 +97,13 @@ const Nature: React.FC = () => {
     o.castShadow = true;
     o.receiveShadow = true;
   });
-  ctree3.scale.setScalar(0.4);
-  ctree3.traverse((o: any) => {
+  tree.scene.scale.setScalar(1.6);
+  tree.scene.traverse((o: any) => {
     o.castShadow = true;
     o.receiveShadow = true;
   });
-  ctree5.scale.setScalar(0.4);
-  ctree5.traverse((o: any) => {
+  tree.scene.scale.setScalar(1.6);
+  tree.scene.traverse((o: any) => {
     o.castShadow = true;
     o.receiveShadow = true;
   });
@@ -110,15 +125,15 @@ const Nature: React.FC = () => {
           position={pos}
           object={
             idx === 1
-              ? birch3.clone()
+              ? tree.scene.clone()
               : idx === 2
-              ? birch4.clone()
+              ? tree.scene.clone()
               : idx === 3
-              ? berry1.clone()
+              ? tree.scene.clone()
               : idx === 4
-              ? ctree3.clone()
+              ? tree.scene.clone()
               : idx === 5
-              ? ctree5.clone()
+              ? tree.scene.clone()
               : idx === 6
               ? grass2.clone()
               : idx === 7
@@ -128,9 +143,9 @@ const Nature: React.FC = () => {
               : idx === 9
               ? rock5.clone()
               : idx === 10
-              ? willow2.clone()
+              ? tree.scene.clone()
               : idx === 11
-              ? willow5.clone()
+              ? tree.scene.clone()
               : log.clone()
           }
         />
